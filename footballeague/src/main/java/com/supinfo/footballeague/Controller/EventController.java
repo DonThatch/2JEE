@@ -1,7 +1,7 @@
 package com.supinfo.footballeague.Controller;
 
 import com.supinfo.footballeague.entity.Event;
-import com.supinfo.footballeague.interfaces.EventService;
+import com.supinfo.footballeague.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
