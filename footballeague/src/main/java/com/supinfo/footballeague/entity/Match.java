@@ -3,6 +3,9 @@ package com.supinfo.footballeague.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "game")
 @Getter
@@ -18,6 +21,18 @@ public class Match {
 
     @Column(name = "home_team_score")
     private Integer homeTeamScore;
+
+    @Column(name = "status", nullable = false)
+    private String status;
+
+    @Column(name = "reason")
+    private String reason;
+
+    @OneToMany(mappedBy = "match")
+    private List<Event> events = new ArrayList<>();
+
+    @OneToMany(mappedBy = "match")
+    private List<Comment> comments = new ArrayList<>();
 
     @Column(name = "away_team_score")
     private Integer awayTeamScore;
@@ -77,5 +92,37 @@ public class Match {
 
     public void setDay(Day day) {
         this.day = day;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
