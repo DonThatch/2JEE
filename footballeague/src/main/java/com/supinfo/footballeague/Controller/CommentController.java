@@ -1,4 +1,4 @@
-package com.supinfo.footballeague.Controller;
+package com.supinfo.footballeague.controller;
 
 import com.supinfo.footballeague.entity.Comment;
 import com.supinfo.footballeague.services.CommentService;

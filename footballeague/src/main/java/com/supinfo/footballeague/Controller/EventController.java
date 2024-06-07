@@ -1,4 +1,4 @@
-package com.supinfo.footballeague.Controller;
+package com.supinfo.footballeague.controller;
 
 import com.supinfo.footballeague.entity.Event;
 import com.supinfo.footballeague.services.EventService;
@@ -13,6 +13,11 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
+
+    @PostMapping("/{matchId}")
+    public Event addEventToMatch(@PathVariable Long matchId, @RequestBody Event event) {
+        return eventService.addEventToMatch(matchId, event);
+    }
 
     @PostMapping
     public Event createEvent(@RequestBody Event event) {

@@ -31,17 +31,26 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public void suspendMatch(Long matchId, String reason) {
         Match match = matchRepository.findById(matchId).orElseThrow(() -> new RuntimeException("Match not found"));
-        match.setStatus("Suspended");
-        match.setReason(reason);
-        matchRepository.save(match);
+        if (match.getStatus().equals("Started")) {
+            match.setStatus("Suspended");
+            match.setReason(reason);
+            matchRepository.save(match);
+        } else {
+            throw new IllegalStateException("Only matches that have started can be suspended.");
+        }
     }
+
 
     @Override
     public void rescheduleMatch(Long matchId, String reason) {
         Match match = matchRepository.findById(matchId).orElseThrow(() -> new RuntimeException("Match not found"));
-        match.setStatus("Rescheduled");
-        match.setReason(reason);
-        matchRepository.save(match);
+        if (!match.getStatus().equals("Started")) {
+            match.setStatus("Rescheduled");
+            match.setReason(reason);
+            matchRepository.save(match);
+        } else {
+            throw new IllegalStateException("Cannot reschedule a match that has already started.");
+        }
     }
-    // autres méthodes...
+
 }
